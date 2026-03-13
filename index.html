@@ -1544,7 +1544,7 @@ function gdSetStatus(state, msg) {
 
 // ── Connect / OAuth ──────────────────────────────────────────────────────────
 function gdriveConnect() {
-  if(GD.CLIENT_ID === '981903611685-9bfd169pf4ca48gqe6in6rsfva7c0l7i.apps.googleusercontent.com') {
+  if(GD.CLIENT_ID === '__GOOGLE_CLIENT_ID__') {
     toast('Google Drive not configured yet — using local storage', 'info');
     return;
   }
@@ -3851,7 +3851,7 @@ console.log('HGC BizBook v2 loaded. '+STOCK.length+' items, DB key: '+DB_KEY);
   // Auto-reconnect Google Drive if user was previously connected
   setTimeout(function(){
     var savedToken = localStorage.getItem('hgc_gd_token');
-    if(savedToken && GD.CLIENT_ID !== '981903611685-9bfd169pf4ca48gqe6in6rsfva7c0l7i.apps.googleusercontent.com') {
+    if(savedToken && GD.CLIENT_ID !== '__GOOGLE_CLIENT_ID__') {
       // Try to use saved token silently
       GD.token = savedToken;
       GD.connected = true;
@@ -3861,7 +3861,7 @@ console.log('HGC BizBook v2 loaded. '+STOCK.length+' items, DB key: '+DB_KEY);
         GD.connected = false; GD.token = null;
         gdSetStatus('off', 'Connect Drive');
       });
-    } else if(GD.CLIENT_ID !== '981903611685-9bfd169pf4ca48gqe6in6rsfva7c0l7i.apps.googleusercontent.com') {
+    } else if(GD.CLIENT_ID !== '__GOOGLE_CLIENT_ID__') {
       gdSetStatus('off', 'Connect Drive');
     }
   }, 1500);
@@ -4378,7 +4378,7 @@ function renderTools(){
   var note    = document.getElementById('gdrive-setup-note');
   if(btnTxt)  btnTxt.textContent = GD.connected ? '☁️ Drive Connected ✓' : '☁️ Connect Google Drive';
   if(detail)  detail.textContent = GD.connected ? ('File: hgc-data.json · auto-saving') : 'Not connected — data is local only';
-  if(note)    note.style.display  = (GD.CLIENT_ID === '981903611685-9bfd169pf4ca48gqe6in6rsfva7c0l7i.apps.googleusercontent.com') ? 'block' : 'none';
+  if(note)    note.style.display  = (GD.CLIENT_ID === '__GOOGLE_CLIENT_ID__') ? 'block' : 'none';
 
   // Render stock reorder list
   var reorderList = document.getElementById('reorderList');
